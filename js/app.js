@@ -41,6 +41,25 @@ class Interfaz {
       formulario.reset();
     }, 3000);
   }
+
+  agregarGastoListado(nombre, cantidad) {
+    const li = document.createElement("li");
+    li.className =
+      "list-group-item d-flex justify-content-between aling-items-center";
+    li.innerHTML = `
+      ${nombre}
+      <span class="badge badge-primary badge-pill">$ ${cantidad}</span>
+  `;
+    document.querySelector("#gastos ul").appendChild(li);
+  }
+
+  presupuestoRestante(cantidad) {
+    const restante = document.querySelector("span#restante");
+    const presupuestoRestanteUsuario = cantidadPresupuesto.presupuestoRestante(
+      cantidad
+    );
+    restante.innerHTML = `${presupuestoRestanteUsuario}`;
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -59,11 +78,14 @@ formulario.addEventListener("submit", function (e) {
   const nombreGasto = document.getElementById("gasto").value;
   const cantidadGasto = document.getElementById("cantidad").value;
 
+  const ui = new Interfaz();
   //Comprobar campos
   if (nombreGasto === "" || cantidadGasto === "") {
     console.error("Campos vacios");
-    new Interfaz().imprimirMensajes("Campos vacíos", "error");
+    ui.imprimirMensajes("Campos vacíos", "error");
   } else {
-    console.log("Satisfactorio");
+    ui.imprimirMensajes("Correcto", "correcto");
+    ui.agregarGastoListado(nombreGasto, cantidadGasto);
+    ui.presupuestoRestante(cantidadGasto);
   }
 });
