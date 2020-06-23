@@ -59,8 +59,6 @@ formulario.addEventListener("submit", function (e) {
   const nombreGasto = document.getElementById("gasto").value;
   const cantidadGasto = document.getElementById("cantidad").value;
 
-  const ui = new Interfaz();
-
   //Comprobar campos
   if (nombreGasto === "" || cantidadGasto === "") {
     console.error("Campos vacios");
